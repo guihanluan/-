@@ -1,0 +1,37 @@
+{
+  "name": "小车运动控制 JSON 协议",
+  "version": 1,
+  "transport": "BLE/GATT",
+  "direction": "bidirectional",
+  "note": "小车当前仅具备摄像头与运动能力，无喷药/补光设备；车端识别结果既可回传文字，也可回传带框快照（小图）。",
+  "channels": {
+    "service": "0000ff00-0000-1000-8000-00805f9b34fb",
+    "cmd":    { "uuid": "0000ff01-0000-1000-8000-00805f9b34fb", "dir": "phone->car", "prop": "WRITE_NO_RESPONSE" },
+    "notify": { "uuid": "0000ff02-0000-1000-8000-00805f9b34fb", "dir": "car->phone", "prop": "NOTIFY" },
+    "image":  { "uuid": "0000ff03-0000-1000-8000-00805f9b34fb", "dir": "car->phone", "prop": "NOTIFY" }
+  },
+  "mtu": 128,
+  "conventions": {
+    "speed": "[-1, 1]，正=前进，负=后退",
+    "angle": "[-45, 45] 度，正=右转，负=左转",
+    "priority": "est(急停) 优先级最高，高于一切"
+  },
+  "downlink": {
+    "mv":  { "t": "mv",  "s": "float -1..1", "a": "float -45..45" },
+    "stp": { "t": "stp" },
+    "est": { "t": "est" },
+    "md":  { "t": "md",  "m": "manual|auto" },
+    "cap": { "t": "cap", "q": "1" },
+    "pg":  { "t": "pg" }
+  },
+  "uplink": {
+    "sta":  { "t": "sta", "b": "int 电量%", "s": "float", "a": "float", "m": "manual|auto" },
+    "dt":   { "t": "dt",  "c": "类名", "p": "float 0..1", "x": "int", "y": "int", "ts": "unix秒" },
+    "img":  { "t": "img", "seq": "int", "w": "int", "h": "int", "fmt": "jpg", "sz": "字节数" },
+    "ak":   { "t": "ak",  "t": "原指令类型", "r": "0|1" },
+    "er":   { "t": "er",  "c": "错误码", "m": "描述" },
+    "pong": { "t": "pong" }
+  },
+  "image_transfer": "车先发 img 头(JSON)于 notify 通道，随后在 image 通道按 MTU-3 连续发 sz 字节 JPEG；手机收满 sz 后解码显示。",
+  "safety": "车收 mv 后开 500ms 看门狗，超时无新 mv 自动停车；est 立即断电机。"
+}

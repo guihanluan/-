@@ -1,0 +1,6 @@
+path: ../datasets/corn-clean
+train: train/images
+val: valid/images
+test: test/images
+nc: 3
+names: ['Corn Rust', 'Grey Leaf Spot', 'Leaf Blight']

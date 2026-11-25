@@ -1,0 +1,39 @@
+# ---------- Python / 虚拟环境 ----------
+.venv/
+.venv_ort116/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ---------- IDE / 系统 ----------
+.idea/
+.vscode/
+*.lnk
+Thumbs.db
+desktop.ini
+
+# ---------- 数据集（体积大、可重新获取，不入库） ----------
+datasets/
+Corn Diseases.v2-no-tile.yolov11/
+data/
+*.cache
+
+# ---------- 训练/推理产物 ----------
+runs/
+outputs/image_cache/
+outputs/vis/
+outputs/empty_check/
+outputs/benchmarks/
+*.log
+wandb/
+
+# ---------- 模型权重中的中间/备份文件 ----------
+*.ckpt
+*_best.pt.tmp
+*.pt.tmp
+
+# ---------- 压缩包 ----------
+*.zip
+*.tar.gz

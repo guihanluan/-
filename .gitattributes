@@ -1,0 +1,45 @@
+# 统一换行符策略：工作区用 CRLF(Windows)，仓库内统一存 LF
+* text=auto
+
+# 文本文件显式声明
+*.py      text
+*.md      text
+*.txt     text
+*.yaml    text
+*.yml     text
+*.json    text
+*.csv     text
+*.kt      text
+*.sh      text
+*.toml    text
+*.cfg     text
+*.ini     text
+
+# 二进制文件：禁止任何 EOL 转换，避免被破坏
+*.pt        binary
+*.pth       binary
+*.onnx      binary
+*.onnx.data binary
+*.ckpt      binary
+*.npy       binary
+*.npz       binary
+*.jpg       binary
+*.jpeg      binary
+*.png       binary
+*.bmp       binary
+*.gif       binary
+*.webp      binary
+*.mp4       binary
+*.avi       binary
+*.zip       binary
+*.gz        binary
+*.7z        binary
+*.exe       binary
+*.dll       binary
+*.pyd       binary
+*.so        binary
+*.docx      binary
+*.doc       binary
+*.pdf       binary
+*.xlsx      binary
+*.pptx      binary
